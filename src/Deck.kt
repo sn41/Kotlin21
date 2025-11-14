@@ -13,12 +13,6 @@ class Deck() {
         true
     }
 
-//    init {
-//        for (i in exists.indices) {
-//            exists[i] = true;
-//        }
-//    }
-
     fun getId(): Int {
         while (true) {
             val i: Int = (0..35).random()
@@ -31,18 +25,7 @@ class Deck() {
 
     fun getName(id: Int): String {
         val point: Int = getPoint(id)
-
-        val indexCard = id % 9
-        val cardName: String? = card[indexCard]
-
-        val pointName: String = getPointName(point)
-
-        val indexSuit = id / 9
-        val suit: String = suit[indexSuit]!!
-
-        val name = "$point $pointName, $cardName, $suit"
-
-        return name
+        return "${getPointName(point)}, ${card[id % 9]}, ${suit[id / 9]}"
     }
 
 
