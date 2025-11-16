@@ -30,21 +30,42 @@ fun main() {
         }while (true)
         results[gamer-1] = sum
     }
+
     grade(results)
+    println("Победители: $results")
 }
 
 fun getCard(deck: Deck, sum: Int): Int {
     //вытащить карту
     val id = deck.getId()
     val name = deck.getName(id)
-    println(sum.toString() + "\t" + name)
+    val sum2 = sum + getPoint(id)
+    println("$name, сумма очков = $sum2")
     // копим очки
-    return getPoint(id)
+    return sum2
 }
 
 
-fun grade(results: IntArray): String {
-    return ""
+fun grade(results: IntArray): List<Int> {
+    // Ищем максимальное количество очков меньшее 22
+    // Вариант 1. Используем цикл
+    var max = 0
+    for (gamerIndex in results.indices) {
+        val result = results[gamerIndex]
+        if(result <= 21 && result > max) { max = result }
+    }
+
+    // Вариант 2. Используем потоки
+    val maxPoints = results.filter { result -> result <=21 }.max()
+
+    //Получаем список игроков с такими очками
+    // Используем цикл
+    val winners = ArrayList<Int>()
+    for ((gamerIndex, result) in results.withIndex()) {
+        if(result == max) { winners.add(gamerIndex) }
+    }
+
+    return winners
 }
 
 
