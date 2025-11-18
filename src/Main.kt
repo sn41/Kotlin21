@@ -42,15 +42,12 @@ fun getCard(deck: Deck, sum: Int): Int {
 
 fun grade(results: IntArray): List<Int> {
     // Ищем максимальное количество очков меньшее 22
-    // Вариант 1. Используем цикл
+
     var max = 0
     for (gamerIndex in results.indices) {
         val result = results[gamerIndex]
         if(result in (max + 1)..21) { max = result }
     }
-
-    // Вариант 2. Используем потоки
-    val maxPoints = results.filter { result -> result <=21 }.max()
 
     //Получаем список игроков с такими очками
     // Используем цикл
