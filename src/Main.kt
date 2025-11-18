@@ -19,20 +19,14 @@ fun main() {
             if (s1 == 'y') {
                 //вытягиваем новую карту
                 sum = getCard(deck, sum)
-                if (sum > 21) {
-                    println("Вы проиграли!!");
-                    break;
-                } else if (sum == 21) {
-                    println("Вы выиграли!!");
-                    break
-                }
-            }
+                if (sum >= 21) break;
+            }else break
         }while (true)
         results[gamer-1] = sum
     }
 
-    grade(results)
-    println("Победители: $results")
+    val winners = grade(results)
+    println("Победители: $winners")
 }
 
 fun getCard(deck: Deck, sum: Int): Int {
@@ -52,7 +46,7 @@ fun grade(results: IntArray): List<Int> {
     var max = 0
     for (gamerIndex in results.indices) {
         val result = results[gamerIndex]
-        if(result <= 21 && result > max) { max = result }
+        if(result in (max + 1)..21) { max = result }
     }
 
     // Вариант 2. Используем потоки
